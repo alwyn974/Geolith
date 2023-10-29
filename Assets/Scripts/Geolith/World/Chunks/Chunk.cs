@@ -103,9 +103,9 @@ namespace Geolith.World.Chunks
         {
             Vector3Int pos = new Vector3Int
             {
-                x = Mathf.FloorToInt(x / (float)world.ChunkSize) * world.ChunkSize,
+                x = Mathf.FloorToInt(x / (float)world.chunkSize) * world.chunkSize,
                 y = Mathf.FloorToInt(y / (float)world.chunkHeight) * world.chunkHeight,
-                z = Mathf.FloorToInt(z / (float)world.ChunkSize) * world.ChunkSize
+                z = Mathf.FloorToInt(z / (float)world.chunkSize) * world.chunkSize
             };
             return pos;
         }

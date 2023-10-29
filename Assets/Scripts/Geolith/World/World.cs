@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Geolith.World.Block;
 using Geolith.World.Chunks;
 using UnityEngine;
@@ -9,10 +8,12 @@ namespace Geolith.World
     public class World : MonoBehaviour
     {
         public int mapSizeInChunks = 10;
-        public int ChunkSize = 16, chunkHeight = 384;
+        public int chunkSize = 16;
+        public int chunkHeight = 384;
         public int waterThreshold = 50;
         public float noiseScale = 0.03f;
         public GameObject chunkPrefab;
+        public GameObject chunksParent;
         // public int chunkDrawingRange = 12; // TODO: make this a settings
 
         public Dictionary<Vector3Int, ChunkData> ChunkDataDictionary = new();
@@ -20,6 +21,7 @@ namespace Geolith.World
 
         private void Start()
         {
+            chunksParent = transform.GetChild(0).gameObject;
             // TODO: move this later
             GenerateWorld();
         }
@@ -38,7 +40,7 @@ namespace Geolith.World
             {
                 for (var z = 0; z < mapSizeInChunks; z++)
                 {
-                    var data = new ChunkData(ChunkSize, chunkHeight, this, new Vector3Int(x * ChunkSize, 0, z * ChunkSize));
+                    var data = new ChunkData(chunkSize, chunkHeight, this, new Vector3Int(x * chunkSize, 0, z * chunkSize));
                     GenerateVoxels(data);
                     ChunkDataDictionary.Add(data.Position, data);
                 }
@@ -48,6 +50,7 @@ namespace Geolith.World
             {
                 var meshData = Chunk.GetChunkMeshData(chunkData);
                 var chunkObject = Instantiate(chunkPrefab, chunkData.Position, Quaternion.identity);
+                chunkObject.transform.parent = chunksParent.transform;
                 var chunkRenderer = chunkObject.GetComponent<ChunkRenderer>();
 
                 ChunkDictionary.Add(chunkData.Position, chunkRenderer);

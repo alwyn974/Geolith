@@ -198,6 +198,11 @@ GameObject:
   - component: {fileID: 1322683230}
   - component: {fileID: 1322683229}
   - component: {fileID: 1322683228}
+  - component: {fileID: 1322683233}
+  - component: {fileID: 1322683232}
+  - component: {fileID: 1322683231}
+  - component: {fileID: 1322683234}
+  - component: {fileID: 1322683235}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -272,13 +277,109 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1322683227}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 80, y: 80, z: 80}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+--- !u!114 &1322683231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1322683227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff4a3e7d1ee4ae5af98bcd428c5b059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 1322683235}
+  playerSpeed: 5
+  playerRunSpeed: 8
+  jumpHeight: 1
+  gravityValue: -9.81
+  flySpeed: 2
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
+  rayDistance: 1
+  <IsGrounded>k__BackingField: 0
+--- !u!114 &1322683232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1322683227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 047a69c60af5cc64da11eacb8c2a2d24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensitivity: 300
+  playerInput: {fileID: 1322683233}
+--- !u!114 &1322683233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1322683227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b32a88dd618e411f9c34df5940b330fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1322683234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1322683227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f91908a28184d7dbe9f4848bf606199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 1322683229}
+  playerInput: {fileID: 1322683233}
+  playerMovement: {fileID: 1322683231}
+  interactionRayLength: 5
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
+  fly: 1
+  world: {fileID: 1903468165}
+--- !u!143 &1322683235
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1322683227}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 90
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1358694431 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7453744009166385901, guid: a3cec1942323684469d7045fcec3cfa6, type: 3}
@@ -470,11 +571,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapSizeInChunks: 10
-  ChunkSize: 16
+  chunkSize: 16
   chunkHeight: 100
   waterThreshold: 50
   noiseScale: 0.03
   chunkPrefab: {fileID: 7659870607119319960}
+  chunksParent: {fileID: 0}
 --- !u!1001 &7659870607119319959
 PrefabInstance:
   m_ObjectHideFlags: 0
