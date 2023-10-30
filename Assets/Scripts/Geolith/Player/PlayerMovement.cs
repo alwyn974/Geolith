@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
     [SerializeField]
     private CharacterController controller;
@@ -17,7 +18,8 @@ public class PlayerMovement : MonoBehaviour
     private float flySpeed = 2;
 
     private Vector3 playerVelocity;
-
+    private PlayerInput input;
+    
     [Header("Grounded check parameters:")]
     [SerializeField]
     private LayerMask groundMask;
@@ -26,11 +28,11 @@ public class PlayerMovement : MonoBehaviour
     [field: SerializeField]
     public bool IsGrounded { get; private set; }
 
-
-
+    
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
+        input = GetComponent<PlayerInput>();
     }
 
     private Vector3 GetMovementDirection(Vector3 movementInput)
@@ -86,7 +88,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (!isOwned) { return; }
         IsGrounded = Physics.Raycast(transform.position, Vector3.down, rayDistance, groundMask);
+        Vector3 movementInput = input.MovementInput;
+        bool runningInput = input.RunningPressed;
+        Walk(movementInput, runningInput);
     }
 
     private void OnDrawGizmos()

@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
-public class PlayerCamera : MonoBehaviour
+public class PlayerCamera : NetworkBehaviour
 {
     [SerializeField]
     private float sensitivity = 300f;
@@ -25,6 +26,8 @@ public class PlayerCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!isLocalPlayer)
+            return;
         float mouseX = playerInput.MousePosition.x * sensitivity * Time.deltaTime;
         float mouseY = playerInput.MousePosition.y * sensitivity * Time.deltaTime;
 
