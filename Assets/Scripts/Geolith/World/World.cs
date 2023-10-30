@@ -13,7 +13,7 @@ namespace Geolith.World
         public int waterThreshold = 50;
         public float noiseScale = 0.03f;
         public GameObject chunkPrefab;
-        public GameObject chunksParent;
+        private GameObject _chunksParent;
         // public int chunkDrawingRange = 12; // TODO: make this a settings
 
         public Dictionary<Vector3Int, ChunkData> ChunkDataDictionary = new();
@@ -21,7 +21,7 @@ namespace Geolith.World
 
         private void Start()
         {
-            chunksParent = transform.GetChild(0).gameObject;
+            _chunksParent = transform.GetChild(0).gameObject;
             // TODO: move this later
             GenerateWorld();
         }
@@ -50,7 +50,7 @@ namespace Geolith.World
             {
                 var meshData = Chunk.GetChunkMeshData(chunkData);
                 var chunkObject = Instantiate(chunkPrefab, chunkData.Position, Quaternion.identity);
-                chunkObject.transform.parent = chunksParent.transform;
+                chunkObject.transform.parent = _chunksParent.transform;
                 var chunkRenderer = chunkObject.GetComponent<ChunkRenderer>();
 
                 ChunkDictionary.Add(chunkData.Position, chunkRenderer);
@@ -71,7 +71,7 @@ namespace Geolith.World
                     {
                         var voxelType = BlockType.Dirt;
                         if (y > groundPosition)
-                            voxelType = y < waterThreshold ? BlockType.Water : BlockType.Air;
+                            voxelType = /* y < waterThreshold ? BlockType.Water : */BlockType.Air;
                         else if (y == groundPosition)
                             voxelType = BlockType.Grass;
 

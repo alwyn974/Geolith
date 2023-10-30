@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -45,8 +44,7 @@ namespace Geolith.World.Chunks
             _mesh.vertices = meshData.Vertices.Concat(meshData.WaterMeshData.Vertices).ToArray();
 
             _mesh.SetTriangles(meshData.Triangles.ToArray(), 0);
-            _mesh.SetTriangles(meshData.WaterMeshData.Triangles.Select(val => val + meshData.Vertices.Count).ToArray(),
-                1);
+            _mesh.SetTriangles(meshData.WaterMeshData.Triangles.Select(val => val + meshData.Vertices.Count).ToArray(), 1);
 
             _mesh.uv = meshData.Uvs.Concat(meshData.WaterMeshData.Uvs).ToArray();
             _mesh.RecalculateNormals();
