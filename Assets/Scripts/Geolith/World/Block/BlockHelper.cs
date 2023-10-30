@@ -17,15 +17,15 @@ namespace Geolith.World.Block
 
         public static MeshData GetMeshData(ChunkData chunk, int x, int y, int z, MeshData meshData, BlockType blockType)
         {
-            if (blockType == BlockType.Air)
+            if (blockType is BlockType.Air or BlockType.Nothing)
                 return meshData;
 
-            foreach (Direction direction in Directions)
+            foreach (var direction in Directions)
             {
                 var neighbourBlockCoordinates = new Vector3Int(x, y, z) + direction.GetVector();
                 var neighbourBlockType = Chunk.GetBlockFromChunkCoordinates(chunk, neighbourBlockCoordinates);
 
-                if ( /*neighbourBlockType != BlockType.Nothing &&*/ // todo: fix
+                if ( neighbourBlockType != BlockType.Nothing && // todo: fix
                     !BlockDataManager.BlockTextureDataDictionary[neighbourBlockType].isSolid)
                 {
                     if (blockType == BlockType.Water && neighbourBlockType == BlockType.Air)
@@ -49,8 +49,7 @@ namespace Geolith.World.Block
             return meshData;
         }
 
-        public static void GetFaceVertices(Direction direction, int x, int y, int z, MeshData meshData,
-            BlockType blockType)
+        public static void GetFaceVertices(Direction direction, int x, int y, int z, MeshData meshData, BlockType blockType)
         {
             var generateCollider = BlockDataManager.BlockTextureDataDictionary[blockType].generateCollider;
             //order of vertices matters for the normals and how we render the mesh

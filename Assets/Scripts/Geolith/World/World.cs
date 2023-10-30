@@ -88,7 +88,7 @@ namespace Geolith.World
             ChunkDataDictionary.TryGetValue(pos, out ChunkData containerChunk);
 
             if (containerChunk == null)
-                return BlockType.Air; // TODO: should be nothing?
+                return BlockType.Nothing; // TODO: should be nothing?
             var blockInChunkCoordinates = Chunk.GetBlockInChunkCoordinates(containerChunk, new Vector3Int(x, y, z));
             return Chunk.GetBlockFromChunkCoordinates(containerChunk, blockInChunkCoordinates);
         }

@@ -2,8 +2,8 @@
 {
     public enum BlockType // TODO: replace this with a class like Minecraft Blocks.BLOCK_TYPE with a registry
     {
-        // Nothing, // If limited map with chunks not loaded/rendered
-        Air,
+        Nothing = -1, // If limited map with chunks not loaded/rendered
+        Air = 0,
         Stone,
         Dirt,
         Grass,
