@@ -71,21 +71,13 @@ namespace Geolith.World.Chunks
 #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
-            if (showGizmos)
-            {
-                if (Application.isPlaying && ChunkData != null)
-                {
-                    if (Selection.activeObject == gameObject)
-                        Gizmos.color = new Color(0, 1, 0, 0.4f);
-                    else
-                        Gizmos.color = new Color(1, 0, 1, 0.4f);
+            if (!showGizmos || !Application.isPlaying || ChunkData == null) return;
+            Gizmos.color = Selection.activeObject == gameObject ? new Color(0, 1, 0, 0.4f) : new Color(1, 0, 1, 0.4f);
 
-                    Gizmos.DrawCube(
-                        transform.position + new Vector3(ChunkData.ChunkSize / 2f, ChunkData.ChunkHeight / 2f,
-                            ChunkData.ChunkSize / 2f),
-                        new Vector3(ChunkData.ChunkSize, ChunkData.ChunkHeight, ChunkData.ChunkSize));
-                }
-            }
+            Gizmos.DrawCube(
+                transform.position + new Vector3(ChunkData.ChunkSize / 2f, ChunkData.ChunkHeight / 2f, ChunkData.ChunkSize / 2f),
+                new Vector3(ChunkData.ChunkSize, ChunkData.ChunkHeight, ChunkData.ChunkSize)
+            );
         }
 #endif
     }

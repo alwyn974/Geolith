@@ -9,7 +9,7 @@ namespace Geolith.World.Block
         {
             Direction.Backwards,
             Direction.Down,
-            Direction.Foreward,
+            Direction.Forward,
             Direction.Left,
             Direction.Right,
             Direction.Up
@@ -25,7 +25,7 @@ namespace Geolith.World.Block
                 var neighbourBlockCoordinates = new Vector3Int(x, y, z) + direction.GetVector();
                 var neighbourBlockType = Chunk.GetBlockFromChunkCoordinates(chunk, neighbourBlockCoordinates);
 
-                if ( neighbourBlockType != BlockType.Nothing && // todo: fix
+                if (neighbourBlockType != BlockType.Nothing && // todo: fix
                     !BlockDataManager.BlockTextureDataDictionary[neighbourBlockType].isSolid)
                 {
                     if (blockType == BlockType.Water && neighbourBlockType == BlockType.Air)
@@ -61,7 +61,7 @@ namespace Geolith.World.Block
                     meshData.AddVertex(new Vector3(x + 0.5f, y + 0.5f, z - 0.5f), generateCollider);
                     meshData.AddVertex(new Vector3(x + 0.5f, y - 0.5f, z - 0.5f), generateCollider);
                     break;
-                case Direction.Foreward:
+                case Direction.Forward:
                     meshData.AddVertex(new Vector3(x + 0.5f, y - 0.5f, z + 0.5f), generateCollider);
                     meshData.AddVertex(new Vector3(x + 0.5f, y + 0.5f, z + 0.5f), generateCollider);
                     meshData.AddVertex(new Vector3(x - 0.5f, y + 0.5f, z + 0.5f), generateCollider);
