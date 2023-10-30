@@ -73,7 +73,6 @@ namespace Geolith.World.Block
                     meshData.AddVertex(new Vector3(x - 0.5f, y + 0.5f, z - 0.5f), generateCollider);
                     meshData.AddVertex(new Vector3(x - 0.5f, y - 0.5f, z - 0.5f), generateCollider);
                     break;
-
                 case Direction.Right:
                     meshData.AddVertex(new Vector3(x + 0.5f, y - 0.5f, z - 0.5f), generateCollider);
                     meshData.AddVertex(new Vector3(x + 0.5f, y + 0.5f, z - 0.5f), generateCollider);
