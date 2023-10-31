@@ -8,7 +8,7 @@ namespace Geolith.World.Chunks
     {
         public static void LoopThroughTheBlocks(ChunkData chunkData, Action<int, int, int> actionCallback)
         {
-            for (int index = 0; index < chunkData.Blocks.Length; index++)
+            for (var index = 0; index < chunkData.Blocks.Length; index++)
             {
                 var position = GetPositionFromIndex(chunkData, index);
                 actionCallback(position.x, position.y, position.z);

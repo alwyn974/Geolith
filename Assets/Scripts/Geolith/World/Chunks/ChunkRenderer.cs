@@ -9,10 +9,10 @@ namespace Geolith.World.Chunks
     [RequireComponent(typeof(MeshCollider))]
     public class ChunkRenderer : MonoBehaviour
     {
-        MeshFilter _meshFilter;
-        MeshCollider _meshCollider;
-        Mesh _mesh;
-        public bool showGizmos = false;
+        private MeshFilter _meshFilter;
+        private MeshCollider _meshCollider;
+        private Mesh _mesh;
+        public bool showGizmos;
 
         public ChunkData ChunkData { get; private set; }
 
@@ -50,9 +50,12 @@ namespace Geolith.World.Chunks
             _mesh.RecalculateNormals();
 
             _meshCollider.sharedMesh = null;
-            Mesh collisionMesh = new Mesh();
-            collisionMesh.vertices = meshData.ColliderVertices.ToArray();
-            collisionMesh.triangles = meshData.ColliderTriangles.ToArray();
+
+            var collisionMesh = new Mesh()
+            {
+                vertices = meshData.ColliderVertices.ToArray(),
+                triangles = meshData.ColliderTriangles.ToArray()
+            };
             collisionMesh.RecalculateNormals();
 
             _meshCollider.sharedMesh = collisionMesh;

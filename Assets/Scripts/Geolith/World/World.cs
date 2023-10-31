@@ -12,7 +12,7 @@ namespace Geolith.World
         public int chunkHeight = 384;
         public int waterThreshold = 50;
         public float noiseScale = 0.03f;
-        public GameObject chunkPrefab;
+        public ChunkRenderer chunkPrefab;
         private GameObject _chunksParent;
         // public int chunkDrawingRange = 12; // TODO: make this a settings
 
@@ -49,9 +49,9 @@ namespace Geolith.World
             foreach (var chunkData in ChunkDataDictionary.Values)
             {
                 var meshData = Chunk.GetChunkMeshData(chunkData);
-                var chunkObject = Instantiate(chunkPrefab, chunkData.Position, Quaternion.identity);
-                chunkObject.transform.parent = _chunksParent.transform;
-                var chunkRenderer = chunkObject.GetComponent<ChunkRenderer>();
+                var chunkRenderer /*chunkObject*/  = Instantiate(chunkPrefab, chunkData.Position, Quaternion.identity);
+                chunkRenderer.transform.parent = _chunksParent.transform;
+                // var chunkRenderer = chunkRenderer.GetComponent<ChunkRenderer>();
 
                 ChunkDictionary.Add(chunkData.Position, chunkRenderer);
                 chunkRenderer.InitializeChunk(chunkData);
@@ -67,11 +67,11 @@ namespace Geolith.World
                 {
                     var noiseValue = Mathf.PerlinNoise((data.Position.x + x) * noiseScale, (data.Position.z + z) * noiseScale);
                     var groundPosition = Mathf.RoundToInt(noiseValue * chunkHeight);
-                    for (int y = 0; y < chunkHeight; y++)
+                    for (var y = 0; y < chunkHeight; y++)
                     {
                         var voxelType = BlockType.Dirt;
                         if (y > groundPosition)
-                            voxelType = /* y < waterThreshold ? BlockType.Water : */BlockType.Air;
+                            voxelType =  y < waterThreshold ? BlockType.Water : BlockType.Air;
                         else if (y == groundPosition)
                             voxelType = BlockType.Grass;
 

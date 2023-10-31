@@ -24,7 +24,14 @@ namespace Geolith.World.Block
             {
                 var neighbourBlockCoordinates = new Vector3Int(x, y, z) + direction.GetVector();
                 var neighbourBlockType = Chunk.GetBlockFromChunkCoordinates(chunk, neighbourBlockCoordinates);
+                Debug.Log(neighbourBlockType);
 
+                // if (neighbourBlockType != BlockType.Nothing && !BlockDataManager.BlockTextureDataDictionary[neighbourBlockType].isSolid)
+                // {
+                //     
+                // }
+                // meshData = GetFaceDataIn(direction, chunk, x, y, z, meshData, blockType);
+            
                 if (neighbourBlockType != BlockType.Nothing && // todo: fix
                     !BlockDataManager.BlockTextureDataDictionary[neighbourBlockType].isSolid)
                 {
@@ -39,8 +46,7 @@ namespace Geolith.World.Block
         }
 
         // TODO: check why chunk is not used
-        public static MeshData GetFaceDataIn(Direction direction, ChunkData chunk, int x, int y, int z,
-            MeshData meshData, BlockType blockType)
+        public static MeshData GetFaceDataIn(Direction direction, ChunkData chunk, int x, int y, int z, MeshData meshData, BlockType blockType)
         {
             GetFaceVertices(direction, x, y, z, meshData, blockType);
             meshData.AddQuadTriangles(BlockDataManager.BlockTextureDataDictionary[blockType].generateCollider);
