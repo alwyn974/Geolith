@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://juvejqitllsq"]
+
+[ext_resource type="PackedScene" uid="uid://017h3214mpta" path="res://assets/models/player/Player.gltf" id="1_i5jus"]
+[ext_resource type="Script" path="res://src/Player/Player.cs" id="2_irj78"]
+[ext_resource type="Script" path="res://src/StateMachine/FiniteStateMachine.cs" id="2_tag64"]
+[ext_resource type="Script" path="res://src/Player/State/IdleState.cs" id="3_1bc57"]
+[ext_resource type="Script" path="res://src/Player/State/MoveState.cs" id="4_mdopj"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4vb68"]
+
+[node name="Player" instance=ExtResource("1_i5jus")]
+script = ExtResource("2_irj78")
+
+[node name="Skeleton3D" parent="root" index="0"]
+bones/1/rotation = Quaternion(0, 0, -0.0218149, 0.999762)
+bones/2/rotation = Quaternion(0, 0, -0.0436194, 0.999048)
+bones/5/rotation = Quaternion(0, 0, 0.0218149, 0.999762)
+bones/11/rotation = Quaternion(0, 0, -0.0218149, 0.999762)
+bones/13/rotation = Quaternion(-3.37404e-15, -0.0234367, 0.0367882, 0.999048)
+bones/16/rotation = Quaternion(0, 0, 0.0218149, 0.999762)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.935759, 0)
+shape = SubResource("CapsuleShape3D_4vb68")
+
+[node name="FiniteStateMachine" type="Node" parent="." index="3" node_paths=PackedStringArray("InitialState")]
+script = ExtResource("2_tag64")
+InitialState = NodePath("IdleState")
+
+[node name="IdleState" type="Node" parent="FiniteStateMachine" index="0" node_paths=PackedStringArray("Entity")]
+script = ExtResource("3_1bc57")
+Entity = NodePath("../..")
+
+[node name="MoveState" type="Node" parent="FiniteStateMachine" index="1" node_paths=PackedStringArray("Entity")]
+script = ExtResource("4_mdopj")
+Entity = NodePath("../..")
