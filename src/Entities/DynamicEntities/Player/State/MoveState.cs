@@ -1,7 +1,7 @@
 using System;
 using Godot;
 
-namespace Geolith.Player.State
+namespace Geolith.Entities.DynamicEntities.Player.State
 {
     [GlobalClass]
     public partial class MoveState : StateMachine.State

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwunkll87py47"]
+
+[ext_resource type="Script" path="res://src/Entities/DynamicEntities/Player/Player.cs" id="1_ut37p"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j1o8o"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ammpe"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+
+[node name="Player" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.80137, 0)
+script = ExtResource("1_ut37p")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_j1o8o")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ammpe")
