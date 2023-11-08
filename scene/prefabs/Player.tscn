@@ -37,24 +37,28 @@ graph_offset = Vector2(-518, -25)
 script = ExtResource("2_irj78")
 
 [node name="Skeleton3D" parent="root" index="0"]
-bones/1/rotation = Quaternion(0, 0, -0.0228099, 0.99974)
+bones/1/rotation = Quaternion(0, 0, -0.0218149, 0.999762)
 bones/2/rotation = Quaternion(0, 0, -0.0436194, 0.999048)
-bones/5/rotation = Quaternion(0, 0, 0.0228099, 0.99974)
-bones/11/rotation = Quaternion(0, 0, -0.0243025, 0.999705)
-bones/12/rotation = Quaternion(0.0103354, 0.00657949, -0.00324465, 0.99992)
-bones/13/rotation = Quaternion(0.000425704, -0.0237966, 0.0374434, 0.999015)
-bones/16/rotation = Quaternion(0, 0, 0.0235562, 0.999723)
+bones/5/rotation = Quaternion(0, 0, 0.0218149, 0.999762)
+bones/11/rotation = Quaternion(0, 0, -0.0218149, 0.999762)
+bones/13/rotation = Quaternion(-3.37404e-15, -0.0234367, 0.0367882, 0.999048)
+bones/16/rotation = Quaternion(0, 0, 0.0218149, 0.999762)
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+[node name="CombatTree" type="AnimationTree" parent="." index="2"]
 tree_root = SubResource("AnimationNodeStateMachine_84r2l")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/emote = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="3"]
+[node name="AdventureTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource("AnimationNodeStateMachine_84r2l")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/emote = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.935759, 0)
 shape = SubResource("CapsuleShape3D_4vb68")
 
-[node name="FiniteStateMachine" type="Node" parent="." index="4" node_paths=PackedStringArray("InitialState")]
+[node name="FiniteStateMachine" type="Node" parent="." index="5" node_paths=PackedStringArray("InitialState")]
 script = ExtResource("2_tag64")
 InitialState = NodePath("IdleState")
 
