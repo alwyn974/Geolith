@@ -8,9 +8,14 @@ namespace Geolith.Player.State
     {
         private Player _player;
 
+        //TODO Remove this when the camera is correctly implemented
+        private Node3D _lookAtNode;
+
         public override void Enter()
         {
-            _player = Entity as Player;
+            //TODO find a better way to do this
+            _player = GetTree().GetNodesInGroup("Player")[0] as Player;
+            _lookAtNode = GetTree().GetNodesInGroup("CameraController")[0] as Node3D;
         }
 
         public override void Update(double delta)
@@ -22,16 +27,13 @@ namespace Geolith.Player.State
             Vector2 inputDir = Input.GetVector("move_l", "move_r", "move_fw", "move_bw");
             Vector3 velocity = (_player.Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y));
 
-            velocity = velocity.Rotated(Vector3.Up, _player.SpringArm.Rotation.Y).Normalized();
-
             if (velocity != Vector3.Zero)
             {
-                velocity.X = velocity.X * _player.Speed;
-                velocity.Z = velocity.Z * _player.Speed;
-
-                var lookDir = velocity;
-                lookDir.Y *= _player.Speed;
-                _player.LookAt(_player.GlobalTransform.Origin + lookDir, Vector3.Up);
+                //TODO find a mathematically correct way to do this
+                var lookAt = new Vector3(_lookAtNode.GlobalPosition.X, _player.GlobalPosition.Y,
+                    _lookAtNode.GlobalPosition.Z);
+                _player.LookAt(lookAt, Vector3.Up);
+                velocity *= _player.Speed;
             }
             else
             {

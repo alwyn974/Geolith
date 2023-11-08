@@ -1,0 +1,65 @@
+[gd_scene load_steps=13 format=3 uid="uid://juvejqitllsq"]
+
+[ext_resource type="PackedScene" uid="uid://017h3214mpta" path="res://assets/models/player/Player.gltf" id="1_i5jus"]
+[ext_resource type="Script" path="res://src/Player/Player.cs" id="2_irj78"]
+[ext_resource type="Script" path="res://src/StateMachine/FiniteStateMachine.cs" id="2_tag64"]
+[ext_resource type="Script" path="res://src/Player/State/IdleState.cs" id="3_1bc57"]
+[ext_resource type="Script" path="res://src/Player/State/MoveState.cs" id="4_mdopj"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1n1kw"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c4rbf"]
+animation = &"animation_player_wave"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xc2y7"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kqu7f"]
+advance_mode = 2
+advance_condition = &"emote"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uqj2u"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_84r2l"]
+states/Idle/node = SubResource("AnimationNodeAnimation_1n1kw")
+states/Idle/position = Vector2(356, 206)
+states/Start/position = Vector2(173, 95)
+states/animation_player_wave/node = SubResource("AnimationNodeAnimation_c4rbf")
+states/animation_player_wave/position = Vector2(488, 112)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_xc2y7"), "Idle", "animation_player_wave", SubResource("AnimationNodeStateMachineTransition_kqu7f"), "animation_player_wave", "Idle", SubResource("AnimationNodeStateMachineTransition_uqj2u")]
+graph_offset = Vector2(-518, -25)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4vb68"]
+
+[node name="Player" groups=["Player"] instance=ExtResource("1_i5jus")]
+script = ExtResource("2_irj78")
+
+[node name="Skeleton3D" parent="root" index="0"]
+bones/1/rotation = Quaternion(0, 0, -0.0228099, 0.99974)
+bones/2/rotation = Quaternion(0, 0, -0.0436194, 0.999048)
+bones/5/rotation = Quaternion(0, 0, 0.0228099, 0.99974)
+bones/11/rotation = Quaternion(0, 0, -0.0243025, 0.999705)
+bones/12/rotation = Quaternion(0.0103354, 0.00657949, -0.00324465, 0.99992)
+bones/13/rotation = Quaternion(0.000425704, -0.0237966, 0.0374434, 0.999015)
+bones/16/rotation = Quaternion(0, 0, 0.0235562, 0.999723)
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource("AnimationNodeStateMachine_84r2l")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/emote = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.935759, 0)
+shape = SubResource("CapsuleShape3D_4vb68")
+
+[node name="FiniteStateMachine" type="Node" parent="." index="4" node_paths=PackedStringArray("InitialState")]
+script = ExtResource("2_tag64")
+InitialState = NodePath("IdleState")
+
+[node name="IdleState" type="Node" parent="FiniteStateMachine" index="0"]
+script = ExtResource("3_1bc57")
+
+[node name="MoveState" type="Node" parent="FiniteStateMachine" index="1"]
+script = ExtResource("4_mdopj")

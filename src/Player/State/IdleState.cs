@@ -9,7 +9,6 @@ namespace Geolith.Player.State
     {
         public override void Enter()
         {
-            GD.Print("IdleState.Enter");
         }
 
         public override void Update(double delta)
@@ -24,7 +23,6 @@ namespace Geolith.Player.State
 
         public override void Exit()
         {
-            GD.Print("IdleState.Exit");
         }
     }
 }
