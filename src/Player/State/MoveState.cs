@@ -7,7 +7,6 @@ namespace Geolith.Player.State
     public partial class MoveState : StateMachine.State
     {
         private Player _player;
-
         //TODO Remove this when the camera is correctly implemented
         private Node3D _lookAtNode;
 
@@ -16,10 +15,6 @@ namespace Geolith.Player.State
             //TODO find a better way to do this
             _player = GetTree().GetNodesInGroup("Player")[0] as Player;
             _lookAtNode = GetTree().GetNodesInGroup("CameraController")[0] as Node3D;
-        }
-
-        public override void Update(double delta)
-        {
         }
 
         public override void PhysicsUpdate(double delta)
@@ -45,10 +40,6 @@ namespace Geolith.Player.State
 
             velocity.Y = _player.Velocity.Y;
             _player.Velocity = velocity;
-        }
-
-        public override void Exit()
-        {
         }
     }
 }

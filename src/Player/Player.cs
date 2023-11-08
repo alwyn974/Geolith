@@ -31,18 +31,5 @@ namespace Geolith.Player
             Velocity = velocity;
             MoveAndSlide();
         }
-
-
-        public override void _UnhandledKeyInput(InputEvent @event)
-        {
-            if (@event is InputEventKey keyEvent)
-            {
-                //Check for the "Emote 1" action. The action is defined in the project settings.
-                if (keyEvent.IsActionPressed("emote_1"))
-                    _animationTree.Set("Emote", true);
-                else if (keyEvent.IsActionReleased("emote_1"))
-                    _animationTree.Set("Emote", false);
-            }
-        }
     }
 }
