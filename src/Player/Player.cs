@@ -7,16 +7,8 @@ namespace Geolith.Player
         [Export] public float Speed = 5.0f;
         [Export] public float JumpForce = 5.0f;
 
-        private AnimationTree _animationTree;
-
         private float _gravity =
             ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
-
-        public override void _Ready()
-        {
-            _animationTree = GetNode<AnimationTree>("AnimationTree");
-            _animationTree.Active = true;
-        }
 
         public override void _PhysicsProcess(double delta)
         {

@@ -6,7 +6,7 @@ namespace Geolith.StateMachine
     [GlobalClass]
     public partial class FiniteStateMachine : Node
     {
-        [Export] public State InitialState = null;
+        [Export] public State InitialState;
 
         private State _currentState;
         private Dictionary<string, State> _states;
@@ -17,11 +17,10 @@ namespace Geolith.StateMachine
 
             foreach (Node child in GetChildren())
             {
-                if (child is State state)
-                {
-                    _states.Add(state.Name, state);
-                    state.Transition += _ChangeState;
-                }
+                if (child is not State state) continue;
+
+                _states.Add(state.Name, state);
+                state.Transition += _ChangeState;
             }
 
             if (InitialState is not null)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://juvejqitllsq"]
+[gd_scene load_steps=7 format=3 uid="uid://juvejqitllsq"]
 
 [ext_resource type="PackedScene" uid="uid://017h3214mpta" path="res://assets/models/player/Player.gltf" id="1_i5jus"]
 [ext_resource type="Script" path="res://src/Player/Player.cs" id="2_irj78"]
@@ -6,34 +6,10 @@
 [ext_resource type="Script" path="res://src/Player/State/IdleState.cs" id="3_1bc57"]
 [ext_resource type="Script" path="res://src/Player/State/MoveState.cs" id="4_mdopj"]
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1n1kw"]
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c4rbf"]
-animation = &"animation_player_wave"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xc2y7"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kqu7f"]
-advance_mode = 2
-advance_condition = &"emote"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uqj2u"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_84r2l"]
-states/Idle/node = SubResource("AnimationNodeAnimation_1n1kw")
-states/Idle/position = Vector2(356, 206)
-states/Start/position = Vector2(173, 95)
-states/animation_player_wave/node = SubResource("AnimationNodeAnimation_c4rbf")
-states/animation_player_wave/position = Vector2(488, 112)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_xc2y7"), "Idle", "animation_player_wave", SubResource("AnimationNodeStateMachineTransition_kqu7f"), "animation_player_wave", "Idle", SubResource("AnimationNodeStateMachineTransition_uqj2u")]
-graph_offset = Vector2(-518, -25)
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4vb68"]
 
 [node name="Player" groups=["Player"] instance=ExtResource("1_i5jus")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.00203228)
 script = ExtResource("2_irj78")
 
 [node name="Skeleton3D" parent="root" index="0"]
@@ -44,21 +20,11 @@ bones/11/rotation = Quaternion(0, 0, -0.0218149, 0.999762)
 bones/13/rotation = Quaternion(-3.37404e-15, -0.0234367, 0.0367882, 0.999048)
 bones/16/rotation = Quaternion(0, 0, 0.0218149, 0.999762)
 
-[node name="CombatTree" type="AnimationTree" parent="." index="2"]
-tree_root = SubResource("AnimationNodeStateMachine_84r2l")
-anim_player = NodePath("../AnimationPlayer")
-parameters/conditions/emote = false
-
-[node name="AdventureTree" type="AnimationTree" parent="." index="3"]
-tree_root = SubResource("AnimationNodeStateMachine_84r2l")
-anim_player = NodePath("../AnimationPlayer")
-parameters/conditions/emote = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="4"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.935759, 0)
 shape = SubResource("CapsuleShape3D_4vb68")
 
-[node name="FiniteStateMachine" type="Node" parent="." index="5" node_paths=PackedStringArray("InitialState")]
+[node name="FiniteStateMachine" type="Node" parent="." index="3" node_paths=PackedStringArray("InitialState")]
 script = ExtResource("2_tag64")
 InitialState = NodePath("IdleState")
 
