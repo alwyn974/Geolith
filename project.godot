@@ -27,6 +27,10 @@ window/size/viewport_height=720
 
 project/assembly_name="Geolith"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/wakatime/plugin.cfg")
+
 [input]
 
 move_fw={
