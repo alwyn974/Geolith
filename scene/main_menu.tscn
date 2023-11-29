@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://48cvwbhn4pds"]
+[gd_scene load_steps=14 format=3 uid="uid://b7eikki82tamu"]
 
 [ext_resource type="Script" path="res://src/GUI/Menu/MainMenu/MainMenu.cs" id="1_2q7q4"]
 [ext_resource type="Texture2D" uid="uid://1raaofxv1jrf" path="res://assets/Menu/bckg.jpg" id="1_o4mt8"]
@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://fh4ea4wlnpvw" path="res://assets/LockVenture/PNG/User Interface/Buttons/48x16/20.png" id="10_3wxvi"]
 [ext_resource type="Texture2D" uid="uid://b6oe3ryyxr1ha" path="res://assets/LockVenture/PNG/User Interface/Buttons/48x16/19.png" id="11_are0o"]
 [ext_resource type="FontFile" uid="uid://du1b02jp7b0xq" path="res://assets/fonts/Minecrafter.Reg.ttf" id="12_ssc6x"]
-[ext_resource type="Texture2D" uid="uid://f3rk0ibdl3ms" path="res://assets/LockVenture/PNG/User Interface/Buttons/16x16/1/79.png" id="13_5pw53"]
+[ext_resource type="PackedScene" uid="uid://iqxvobt2wh1w" path="res://scene/GUI/settings.tscn" id="13_f8n50"]
 
 [node name="MainMenu" type="Control"]
 process_mode = 3
@@ -22,34 +22,33 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
 script = ExtResource("1_2q7q4")
 
-[node name="Bacground_Img" type="TextureRect" parent="."]
+[node name="Background_Img" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.999024, 0.996366)
 texture = ExtResource("1_o4mt8")
 expand_mode = 1
 
 [node name="TittleGame_Label" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -318.0
-offset_top = 100.0
-offset_right = 332.0
-offset_bottom = 308.0
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 23.0
+offset_bottom = 91.0
 grow_horizontal = 2
-scale = Vector2(1, 0.808)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("12_ssc6x")
-theme_override_font_sizes/font_size = 150
-text = "GEOLITH"
+theme_override_font_sizes/font_size = 43
+text = "GEolith"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Menu" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -58,17 +57,19 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -74.0
-offset_top = -23.0
-offset_right = -26.0
-offset_bottom = 33.0
+offset_left = -33.0
+offset_top = -15.0
+offset_right = 32.0
+offset_bottom = 46.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(4.124, 5)
+alignment = 1
 
 [node name="Play_Btn" type="TextureButton" parent="Menu"]
 texture_filter = 1
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 focus_neighbor_top = NodePath("../Quit_Btn")
 texture_normal = ExtResource("3_3dvow")
 texture_pressed = ExtResource("4_1jrta")
@@ -79,6 +80,7 @@ stretch_mode = 0
 [node name="Settings_Btn" type="TextureButton" parent="Menu"]
 texture_filter = 1
 layout_mode = 2
+size_flags_horizontal = 4
 texture_normal = ExtResource("6_08v51")
 texture_pressed = ExtResource("7_8kng1")
 texture_hover = ExtResource("8_va6cd")
@@ -88,6 +90,8 @@ stretch_mode = 0
 [node name="Quit_Btn" type="TextureButton" parent="Menu"]
 texture_filter = 1
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 focus_neighbor_bottom = NodePath("../Play_Btn")
 texture_normal = ExtResource("9_7l52v")
 texture_pressed = ExtResource("10_3wxvi")
@@ -95,199 +99,14 @@ texture_hover = ExtResource("11_are0o")
 texture_focused = ExtResource("11_are0o")
 stretch_mode = 0
 
-[node name="Settings" type="Control" parent="."]
+[node name="Settings" parent="." instance=ExtResource("13_f8n50")]
 visible = false
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = -27.5
+offset_top = 11.5
+offset_right = 24.5
+offset_bottom = 11.5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Settings"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.476997
-anchor_top = 0.449074
-anchor_right = 0.565439
-anchor_bottom = 0.656793
-offset_right = -48.8853
-offset_bottom = -68.6017
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.92236, 2.03942)
-metadata/_edit_use_anchors_ = true
-
-[node name="Video" type="Button" parent="Settings/VBoxContainer"]
-layout_mode = 2
-text = "Video"
-
-[node name="Audio" type="Button" parent="Settings/VBoxContainer"]
-layout_mode = 2
-text = "Audio"
-
-[node name="BackFromSettings" type="Button" parent="Settings"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -31.5
-offset_top = -31.0
-offset_right = 31.5
-grow_horizontal = 2
-grow_vertical = 0
-scale = Vector2(0.970849, 1.03273)
-text = "Back"
-icon = ExtResource("13_5pw53")
-
-[node name="Video" type="Control" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Video"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -55.5
-offset_top = -43.0
-offset_right = 55.5
-offset_bottom = 43.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Labels" type="VBoxContainer" parent="Video/HBoxContainer"]
-layout_mode = 2
-
-[node name="FullScreen" type="Label" parent="Video/HBoxContainer/Labels"]
-layout_mode = 2
-size_flags_vertical = 6
-text = "FullScreen"
-
-[node name="Borderless" type="Label" parent="Video/HBoxContainer/Labels"]
-layout_mode = 2
-size_flags_vertical = 6
-text = "Borderless
-"
-
-[node name="VSynx" type="Label" parent="Video/HBoxContainer/Labels"]
-layout_mode = 2
-size_flags_vertical = 6
-text = "VSync
-"
-
-[node name="Checks" type="VBoxContainer" parent="Video/HBoxContainer"]
-layout_mode = 2
-
-[node name="FullScreen" type="CheckBox" parent="Video/HBoxContainer/Checks"]
-layout_mode = 2
-size_flags_vertical = 6
-
-[node name="Borderless" type="CheckBox" parent="Video/HBoxContainer/Checks"]
-layout_mode = 2
-size_flags_vertical = 6
-
-[node name="VSync" type="CheckBox" parent="Video/HBoxContainer/Checks"]
-layout_mode = 2
-size_flags_vertical = 6
-
-[node name="BackFromVideo" type="Button" parent="Video"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -31.5
-offset_top = -31.0
-offset_right = 31.5
-grow_horizontal = 2
-grow_vertical = 0
-scale = Vector2(0.970849, 1.03273)
-text = "Back"
-icon = ExtResource("13_5pw53")
-
-[node name="Audio" type="Control" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Audio"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -88.0
-offset_top = -43.0
-offset_right = 88.0
-offset_bottom = 43.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Labels" type="VBoxContainer" parent="Audio/HBoxContainer"]
-layout_mode = 2
-
-[node name="Master" type="Label" parent="Audio/HBoxContainer/Labels"]
-layout_mode = 2
-size_flags_vertical = 6
-text = "Master"
-
-[node name="Music" type="Label" parent="Audio/HBoxContainer/Labels"]
-layout_mode = 2
-size_flags_vertical = 6
-text = "Music"
-
-[node name="SFX" type="Label" parent="Audio/HBoxContainer/Labels"]
-layout_mode = 2
-size_flags_vertical = 6
-text = "SFX"
-
-[node name="Sliders" type="VBoxContainer" parent="Audio/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Master" type="HSlider" parent="Audio/HBoxContainer/Sliders"]
-layout_mode = 2
-size_flags_vertical = 6
-
-[node name="Music" type="HSlider" parent="Audio/HBoxContainer/Sliders"]
-layout_mode = 2
-size_flags_vertical = 6
-
-[node name="SFX" type="HSlider" parent="Audio/HBoxContainer/Sliders"]
-layout_mode = 2
-size_flags_vertical = 6
-
-[node name="BackFromAudio" type="Button" parent="Audio"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -31.5
-offset_top = -31.0
-offset_right = 31.5
-grow_horizontal = 2
-grow_vertical = 0
-scale = Vector2(0.970849, 1.03273)
-text = "Back"
-icon = ExtResource("13_5pw53")
-
-[connection signal="pressed" from="Menu/Play_Btn" to="." method="_goToGame"]
-[connection signal="pressed" from="Menu/Quit_Btn" to="." method="_quitGame"]
+[connection signal="pressed" from="Menu/Play_Btn" to="." method="GoToGame"]
+[connection signal="pressed" from="Menu/Settings_Btn" to="." method="GoToOptions"]
+[connection signal="pressed" from="Menu/Quit_Btn" to="." method="QuitGame"]
