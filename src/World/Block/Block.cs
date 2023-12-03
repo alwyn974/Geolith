@@ -3,8 +3,8 @@ using System;
 
 namespace Geolith.World.Block
 {
-    public class Block
-    {
+	public class Block
+	{
 
-    }
+	}
 }

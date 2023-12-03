@@ -13,7 +13,7 @@ config_version=5
 config/name="Geolith"
 config/description="Geolith"
 run/main_scene="res://scene/main_menu.tscn"
-config/features=PackedStringArray("4.1", "C#", "Forward Plus")
+config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 boot_splash/image="res://assets/icons/icon.png"
 config/icon="res://assets/icons/icon.png"
 config/windows_native_icon="res://assets/icons/icon.ico"
@@ -26,6 +26,10 @@ window/size/viewport_height=720
 [dotnet]
 
 project/assembly_name="Geolith"
+
+[editor_plugins]
+
+enabled=PackedStringArray()
 
 [rendering]
 
